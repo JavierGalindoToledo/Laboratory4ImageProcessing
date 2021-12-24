@@ -20,8 +20,13 @@ def apply_gabor_filter(img):
         out.append(res)
     return out,angles
 
-##   - Нормализация и преобразование в int8 (adaptiveThreshold работает только с int8 - Бинаризация - Использование медианного размытия
-
+##   - Нормализация и преобразование в int8 (adaptiveThreshold работает только с int8 / Бинаризация / Использование медианного размытия
+def post_poccessing(img):
+    result =  img
+    result = normalize8(img)
+    result = cv.adaptiveThreshold(result,255,cv.ADAPTIVE_THRESH_GAUSSIAN_C,cv.THRESH_BINARY,11,2)
+    result = cv.medianBlur(result,5)
+    return result
 ## Результаты
 ![finger1](https://user-images.githubusercontent.com/65180398/147357451-130d3eda-c5c0-4191-b72e-440efd8da4a2.png)
 ![finger2](https://user-images.githubusercontent.com/65180398/147357675-fc44a7e3-6855-4038-a62b-5486ddb8dc8a.png)
