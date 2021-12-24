@@ -1,31 +1,31 @@
 # Laboratory4ImageProcessing
 
 ## Здесь мы нормализуем изображение
-def normalize_image(img):
-    norm_image = cv.normalize(
-        img, None, alpha=0, beta=1, norm_type=cv.NORM_MINMAX, dtype=cv.CV_32F)
+def normalize_image(img):\
+    norm_image = cv.normalize(\
+        img, None, alpha=0, beta=1, norm_type=cv.NORM_MINMAX, dtype=cv.CV_32F)\
     return norm_image
     
 ## мы определяем фильтр Габора и применяем его
-def Gabor_filtering(img, ker_size, si, t, l, angle):
-    kernel = cv.getGaborKernel((ker_size,ker_size),si,t,l,angle)
-    out =  cv.filter2D(img,-1,kernel)
-    return out
+def Gabor_filtering(img, ker_size, si, t, l, angle):\
+    kernel = cv.getGaborKernel((ker_size,ker_size),si,t,l,angle)\
+    out =  cv.filter2D(img,-1,kernel)\
+    return out\
     
-def apply_gabor_filter(img):
-    angles = [0,20,40,60,80,90]
-    out = []
-    for a in angles:
-        res = Gabor_filtering(img, 15, 7, 11, 3, a)
-        out.append(res)
-    return out,angles
+def apply_gabor_filter(img):\
+    angles = [0,20,40,60,80,90]\
+    out = []\
+    for a in angles:\
+        res = Gabor_filtering(img, 15, 7, 11, 3, a)\
+        out.append(res)\
+    return out,angles\
 
 ##   - Нормализация и преобразование в int8 (adaptiveThreshold работает только с int8 / Бинаризация / Использование медианного размытия
-def post_poccessing(img):
-    result =  img
-    result = normalize8(img)
-    result = cv.adaptiveThreshold(result,255,cv.ADAPTIVE_THRESH_GAUSSIAN_C,cv.THRESH_BINARY,11,2)
-    result = cv.medianBlur(result,5)
+def post_poccessing(img):\
+    result =  img\
+    result = normalize8(img)\
+    result = cv.adaptiveThreshold(result,255,cv.ADAPTIVE_THRESH_GAUSSIAN_C,cv.THRESH_BINARY,11,2)\
+    result = cv.medianBlur(result,5)\
     return result
 ## Результаты
 ![finger1](https://user-images.githubusercontent.com/65180398/147357451-130d3eda-c5c0-4191-b72e-440efd8da4a2.png)
